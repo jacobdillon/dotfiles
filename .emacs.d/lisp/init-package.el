@@ -1,7 +1,8 @@
 ;;; Config/initialization of package.el and related tools
 
-;; Initilize package.el
 (require 'package)
+
+;; Initilize package
 (setq package-enable-at-startup nil)
 (unless package--initialized (package-initialize))
 
