@@ -15,28 +15,31 @@
 (add-hook 'prog-mode-hook 'display-line-numbers-mode)
 
 ;; Fontface
-(set-frame-font "DejaVu Sans Mono 10" nil t)
+(set-frame-font "Iosevka Type 12" nil t)
 
 ;; Theme settings
-(use-package solarized-theme
+(use-package dracula-theme
   :config
-  (load-theme 'solarized-dark t)
-  (setq solarized-use-variable-pitch nil
-	x-underline-at-descent-line t
-	solarized-scale-org-headlines nil
-	solarized-emphasize-indicators nil
-	solarized-high-contrast-mode-line t)
-  (defun toggle-bg ()
-    "Toggles from dark to light background (and vice-versa)"
-    (interactive)
-    (if (eq (frame-parameter (next-frame) 'background-mode) 'dark)
-	(progn
-	  ;; Light Mode
-	  (disable-theme 'solarized-dark)
-	  (load-theme 'solarized-light t))
-      ;; Dark Mode
-      (disable-theme 'solarized-light)
-      (load-theme 'solarized-dark t)))
-  (global-set-key (kbd "<f5>") 'toggle-bg))
+  (load-theme 'dracula t))
+;(use-package solarized-theme
+;  :config
+;  (load-theme 'solarized-dark t)
+;  (setq solarized-use-variable-pitch nil
+;	x-underline-at-descent-line t
+;	solarized-scale-org-headlines nil
+;	solarized-emphasize-indicators nil
+;	solarized-high-contrast-mode-line t)
+;  (defun toggle-bg ()
+;    "Toggles from dark to light background (and vice-versa)"
+;    (interactive)
+;    (if (eq (frame-parameter (next-frame) 'background-mode) 'dark)
+;	(progn
+;	  ;; Light Mode
+;	  (disable-theme 'solarized-dark)
+;	  (load-theme 'solarized-light t))
+;      ;; Dark Mode
+;      (disable-theme 'solarized-light)
+;      (load-theme 'solarized-dark t)))
+;  (global-set-key (kbd "<f5>") 'toggle-bg))
 
 (provide 'init-theme)

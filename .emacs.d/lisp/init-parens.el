@@ -10,6 +10,7 @@
 (use-package smartparens
   :config
   (require 'smartparens-config) ; Base smartparens configuration
-  (add-hook 'prog-mode-hook #'smartparens-mode))
+  (add-hook 'prog-mode-hook #'smartparens-mode)
+  (setq-default sp-escape-quotes-after-insert nil)) ; Fix for cc-mode
 
 (provide 'init-parens)
