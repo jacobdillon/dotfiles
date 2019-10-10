@@ -112,6 +112,7 @@ in
     gimp
     gitAndTools.gitFull
     gnome3.eog
+    gnome3.gnome-calculator
     gnome3.gnome-screenshot
     gnome3.gnome-tweaks
     gnome3.nautilus
