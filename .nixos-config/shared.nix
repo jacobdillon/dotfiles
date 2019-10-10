@@ -138,6 +138,12 @@ in
     youtube-dl
   ];
 
+  # Let nautilus find extensions
+  environment.variables.NAUTILUS_EXTENSION_DIR = "${config.system.path}/lib/nautilus/extensions-3.0";
+  environment.pathsToLink = [
+    "/share/nautilus-python/extensions"
+  ];
+  
   # Font settings
   fonts = {
     # Install a sane set of default fonts
@@ -197,6 +203,7 @@ in
 
     # Gnome3
     gnome3 = {
+      core-shell.enable = true;
       core-utilities.enable = false;
       gnome-remote-desktop.enable = false;      
     };
