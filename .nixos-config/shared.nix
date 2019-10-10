@@ -134,6 +134,7 @@ in
     unstable.emacs
     unstable.lutris
     unstable.multimc    
+    unstable.steam
     unzip
     youtube-dl
   ];
