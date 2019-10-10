@@ -15,6 +15,7 @@
 (require 'init-flycheck)
 (require 'init-flyspell)
 (require 'init-general)
+(require 'init-dired)
 (require 'init-c)
 (require 'init-git)
 (require 'init-haskell)
