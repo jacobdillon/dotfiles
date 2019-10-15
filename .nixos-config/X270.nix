@@ -2,7 +2,7 @@
 
 {
   imports = [ ./shared.nix ];
-  
+
   fileSystems = {
     "/" = {
       device = "/dev/disk/by-uuid/4c40f7bf-718a-427b-854d-7fb13571673b";

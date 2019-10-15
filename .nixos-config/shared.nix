@@ -1,11 +1,9 @@
 { config, pkgs, lib, ... }:
 
 let
-  unstableTarball =
-    fetchTarball
-      https://github.com/NixOS/nixpkgs-channels/archive/nixos-unstable.tar.gz;
-in
-{
+  unstableTarball = fetchTarball
+    "https://github.com/NixOS/nixpkgs-channels/archive/nixos-unstable.tar.gz";
+in {
   swapDevices = [{ device = "/swapfile"; }];
 
   boot = {
@@ -13,7 +11,7 @@ in
       systemd-boot.enable = true;
       efi.canTouchEfiVariables = true;
     };
-    
+
     # Use latest kernel package
     #kernelPackages = pkgs.linuxPackages_latest;
 
@@ -85,15 +83,11 @@ in
     pulseaudio = true;
 
     packageOverrides = pkgs: {
-      unstable = import unstableTarball {
-        config = config.nixpkgs.config;
-      };
-      
+      unstable = import unstableTarball { config = config.nixpkgs.config; };
+
       iosevka-type = pkgs.iosevka.override {
         set = "type";
-        design = [
-          "type" "ss08"
-        ];
+        design = [ "type" "ss08" ];
       };
     };
   };
@@ -123,7 +117,7 @@ in
     manpages
     mgba
     mpv
-    multimc    
+    multimc
     nixfmt
     opera
     p7zip
@@ -142,11 +136,10 @@ in
   ];
 
   # Let nautilus find extensions
-  environment.variables.NAUTILUS_EXTENSION_DIR = "${config.system.path}/lib/nautilus/extensions-3.0";
-  environment.pathsToLink = [
-    "/share/nautilus-python/extensions"
-  ];
-  
+  environment.variables.NAUTILUS_EXTENSION_DIR =
+    "${config.system.path}/lib/nautilus/extensions-3.0";
+  environment.pathsToLink = [ "/share/nautilus-python/extensions" ];
+
   # Font settings
   fonts = {
     # Install a sane set of default fonts
@@ -187,7 +180,7 @@ in
 
     # Use systemd-timesyncd to keep time
     timesyncd.enable = true;
-    
+
     # Enable syncthing
     syncthing = {
       enable = true;
@@ -208,7 +201,7 @@ in
     gnome3 = {
       core-shell.enable = true;
       core-utilities.enable = false;
-      gnome-remote-desktop.enable = false;      
+      gnome-remote-desktop.enable = false;
     };
   };
 
