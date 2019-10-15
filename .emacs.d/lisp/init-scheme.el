@@ -2,7 +2,7 @@
 
 (use-package geiser
   :config
-  (setq geiser-active-implementations '(racket))
-  (setq geiser-default-implementation 'racket))
+  (setq geiser-active-implementations '(racket chicken))
+  (setq geiser-default-implementation 'chicken))
 
 (provide 'init-scheme)

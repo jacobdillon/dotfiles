@@ -6,7 +6,7 @@
 	org-fontify-whole-heading-line t
 	org-src-fontify-natively t
 	org-log-done t)
-  (add-hook 'org-mode-hook #'(lambda () (auto-fill-mode +1)))
+  (add-hook 'org-mode-hook 'turn-on-auto-fill)
   (global-set-key (kbd "C-c l") 'org-store-link)
   (global-set-key (kbd "C-c a") 'org-agenda))
 

@@ -123,6 +123,8 @@ in
     manpages
     mgba
     mpv
+    multimc    
+    nixfmt
     opera
     p7zip
     qbittorrent
@@ -134,7 +136,6 @@ in
     tree
     unstable.emacs
     unstable.lutris
-    unstable.multimc    
     unstable.steam
     unzip
     youtube-dl

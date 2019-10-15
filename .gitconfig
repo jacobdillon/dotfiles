@@ -3,3 +3,5 @@
 	email = jacob.dillon@uconn.edu
 [core]
 	editor = emacs
+[diff]
+	noprefix = true
