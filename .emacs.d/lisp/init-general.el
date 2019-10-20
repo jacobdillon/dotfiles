@@ -23,8 +23,8 @@
 
 ;; Set backup files and autosave files to save in a sane location
 (setq backup-by-copying t
-      backup-directory-alist '((".*" . "~/.emacs.d/backups"))
-      auto-save-file-name-transforms '((".*" "~/.emacs.d/autosave" t))
+      backup-directory-alist '((".*" . "~/.emacs.d/backups/"))
+      auto-save-file-name-transforms '((".*" "~/.emacs.d/autosave/" t))
       delete-old-versions t
       kept-new-versions 6
       kept-old-versions 2

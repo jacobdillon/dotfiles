@@ -17,6 +17,7 @@
 (require 'init-general)
 (require 'init-dired)
 (require 'init-c)
+(require 'init-web)
 (require 'init-git)
 (require 'init-haskell)
 (require 'init-ivy)

@@ -108,6 +108,7 @@ in {
     gnome3.eog
     gnome3.gnome-calculator
     gnome3.gnome-screenshot
+    unstable.heroku
     gnome3.gnome-tweaks
     gnome3.nautilus
     gnupg
@@ -121,6 +122,8 @@ in {
     nixfmt
     opera
     p7zip
+    pass
+    postman
     qbittorrent
     racket
     slack
