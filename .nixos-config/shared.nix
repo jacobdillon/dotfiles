@@ -1,8 +1,13 @@
 { config, pkgs, lib, ... }:
 
 let
-  unstableTarball = fetchTarball
-    "https://github.com/NixOS/nixpkgs-channels/archive/nixos-unstable.tar.gz";
+  unstable = import (fetchTarball {
+    url =
+      "https://github.com/NixOS/nixpkgs-channels/archive/nixos-unstable.tar.gz";
+  }) { config = config.nixpkgs.config; };
+  lorri = import (fetchTarball {
+    url = "https://github.com/target/lorri/archive/rolling-release.tar.gz";
+  }) { };
 in {
   swapDevices = [{ device = "/swapfile"; }];
 
@@ -83,8 +88,6 @@ in {
     pulseaudio = true;
 
     packageOverrides = pkgs: {
-      unstable = import unstableTarball { config = config.nixpkgs.config; };
-
       iosevka-type = pkgs.iosevka.override {
         set = "type";
         design = [ "type" "ss08" ];
@@ -98,6 +101,7 @@ in {
     colordiff
     curl
     direnv
+    lorri
     discord
     docker-compose
     exfat
@@ -210,6 +214,36 @@ in {
 
   # Enable docker
   virtualisation.docker.enable = true;
+
+  # Add lorri user service
+  systemd.user = {
+    sockets.lorri = {
+      description = "lorri build daemon";
+      listenStreams = [ "%t/lorri/daemon.socket" ];
+      wantedBy = [ "sockets.target" ];
+    };
+
+    services.lorri = {
+      description = "lorri build daemon";
+      documentation = [ "https://github.com/target/lorri" ];
+      requires = [ "lorri.socket" ];
+      after = [ "lorri.socket" ];
+
+      unitConfig = {
+        ConditionUser = "!@system";
+        RefuseManualStart = true;
+      };
+
+      serviceConfig = {
+        ExecStart = "${lorri}/bin/lorri daemon";
+        PrivateTmp = true;
+        ProtectSystem = "strict";
+        WorkingDirectory = "%h";
+        Restart = "on-failure";
+        Environment = "PATH=${pkgs.nix}/bin RUST_BACKTRACE=1";
+      };
+    };
+  };
 
   # Define a user account
   users.extraUsers.jacob = {
