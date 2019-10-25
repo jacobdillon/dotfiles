@@ -125,6 +125,7 @@ in {
     opera
     p7zip
     pass
+    posix_man_pages
     qbittorrent
     slack
     spotify
@@ -141,6 +142,9 @@ in {
   environment.variables.NAUTILUS_EXTENSION_DIR =
     "${config.system.path}/lib/nautilus/extensions-3.0";
   environment.pathsToLink = [ "/share/nautilus-python/extensions" ];
+
+  # Get full man pages
+  documentation.dev.enable = true;
 
   # Font settings
   fonts = {
