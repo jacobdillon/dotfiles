@@ -97,13 +97,12 @@ in {
 
   # Packages installed in system profile
   environment.systemPackages = with pkgs; [
+    aspell
     calibre
     colordiff
     curl
     direnv
-    lorri
     discord
-    docker-compose
     exfat
     file
     firefox
@@ -112,13 +111,12 @@ in {
     gnome3.eog
     gnome3.gnome-calculator
     gnome3.gnome-screenshot
-    unstable.heroku
     gnome3.gnome-tweaks
     gnome3.nautilus
     gnupg
     imagemagick
-    ispell
     libreoffice
+    lorri
     manpages
     mgba
     mpv
@@ -127,19 +125,16 @@ in {
     opera
     p7zip
     pass
-    postman
     qbittorrent
-    racket
     slack
     spotify
     tdesktop
     texlive.combined.scheme-full
     tree
     unstable.emacs
-    unstable.lutris
+    unstable.heroku
     unstable.steam
     unzip
-    youtube-dl
   ];
 
   # Let nautilus find extensions
@@ -240,7 +235,7 @@ in {
         ProtectSystem = "strict";
         WorkingDirectory = "%h";
         Restart = "on-failure";
-        Environment = "PATH=${pkgs.nix}/bin RUST_BACKTRACE=1";
+        Environment = "PATH=${pkgs.nix}/bin";
       };
     };
   };
