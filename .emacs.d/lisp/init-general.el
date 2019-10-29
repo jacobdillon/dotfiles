@@ -45,8 +45,9 @@
 
 ;; pdf-view
 (use-package pdf-tools
+  :mode ("\\.pdf\\'" . pdf-tools-install)
   :config
-  (pdf-tools-install))
+  (setq mouse-wheel-follow-mouse t))
 
 ;; exec-path-from-shell
 (use-package exec-path-from-shell

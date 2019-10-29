@@ -1,19 +1,18 @@
 ;;; Config for latex modes/tools
 
-(use-package tex
+(use-package tex-site
   :ensure auctex
+  :mode ("\\.tex\\'" . latex-mode)
   :config
-  (setq TeX-auto-save t
-	TeX-parse-self t
-	TeX-save-query nil))
+  (add-hook 'LaTeX-mode-hook (lambda () (setq TeX-auto-save t
+					      TeX-parse-self t
+					      TeX-PDF-mode t))))
 
 (use-package auctex-latexmk
-  :after tex
+  :after auctex
   :config
   (auctex-latexmk-setup)
-  (defun my-tex-set-latexmk-as-default ()
-    (setq TeX-command-default "LatexMk"))
-  (add-hook 'tex-mode-hook #'my-tex-set-latexmk-as-default)
+  (add-hook 'LaTeX-mode-hook (lambda () (setq TeX-command-default "LatexMk")))
   (setq auctex-latexmk-inherit-TeX-PDF-mode t))
 
 (provide 'init-latex)
