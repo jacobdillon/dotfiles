@@ -17,6 +17,9 @@
 ;; Use y and n instead of yes and no
 (defalias 'yes-or-no-p 'y-or-n-p)
 
+;; Don't use customize
+(setq custom-file "")
+
 ;; Turn off the splash screen
 (setq inhibit-startup-screen t
       initial-scratch-message "")
@@ -63,6 +66,9 @@
   :config
   (add-to-list 'auto-mode-alist '("\\.yml\\'" . yaml-mode))
   (add-hook 'yaml-mode-hook
-    '(lambda () (define-key yaml-mode-map "\C-m" 'newline-and-indent))))
+	    '(lambda () (define-key yaml-mode-map "\C-m" 'newline-and-indent))))
+
+(use-package aggressive-indent
+  :hook ('prog-mode . #'aggressive-indent-mode))
 
 (provide 'init-general)

@@ -21,25 +21,5 @@
 (use-package dracula-theme
   :config
   (load-theme 'dracula t))
-;(use-package solarized-theme
-;  :config
-;  (load-theme 'solarized-dark t)
-;  (setq solarized-use-variable-pitch nil
-;	x-underline-at-descent-line t
-;	solarized-scale-org-headlines nil
-;	solarized-emphasize-indicators nil
-;	solarized-high-contrast-mode-line t)
-;  (defun toggle-bg ()
-;    "Toggles from dark to light background (and vice-versa)"
-;    (interactive)
-;    (if (eq (frame-parameter (next-frame) 'background-mode) 'dark)
-;	(progn
-;	  ;; Light Mode
-;	  (disable-theme 'solarized-dark)
-;	  (load-theme 'solarized-light t))
-;      ;; Dark Mode
-;      (disable-theme 'solarized-light)
-;      (load-theme 'solarized-dark t)))
-;  (global-set-key (kbd "<f5>") 'toggle-bg))
 
 (provide 'init-theme)

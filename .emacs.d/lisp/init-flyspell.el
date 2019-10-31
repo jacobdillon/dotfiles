@@ -1,12 +1,13 @@
 ;;; Config for flyspell mode
 
-(setq ispell-program-name "aspell"
-      ispell-dictionary "english")
+(use-package flyspell
+  :config
+  (flyspell-mode 1))
 
-;; Enable flyspell for various modes
-(add-hook 'prog-mode-hook 'flyspell-prog-mode)
-(add-hook 'text-mode-hook 'turn-on-flyspell)
-(add-hook 'org-mode-hook 'turn-on-flyspell)
-(add-hook 'LaTeX-mode-hook 'turn-on-flyspell)
+(use-package flyspell-correct-ivy
+  :after flyspell
+  :bind ("C-M-;" . flyspell-correct-wrapper)
+  :config
+  (setq flyspell-correct-interface #'flyspell-correct-ivy))
 
 (provide 'init-flyspell)
