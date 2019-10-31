@@ -84,6 +84,8 @@ in {
     allowUnfree = true;
     pulseaudio = true;
 
+    firefox = { enableAdobeFlash = true; };
+
     packageOverrides = pkgs: {
       iosevka-type = pkgs.iosevka.override {
         set = "type";

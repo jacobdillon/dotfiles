@@ -2,6 +2,7 @@
 
 ;; company
 (use-package company
+  :defer t
   :config
   (add-hook 'after-init-hook 'global-company-mode)
   (setq company-idle-delay 0)
