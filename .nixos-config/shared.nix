@@ -15,7 +15,7 @@ in {
     };
 
     # Use latest kernel package
-    #kernelPackages = pkgs.linuxPackages_latest;
+    kernelPackages = pkgs.linuxPackages_latest;
 
     cleanTmpDir = true;
   };
@@ -147,6 +147,7 @@ in {
 
   # Get full man pages
   documentation.dev.enable = true;
+  documentation.doc.enable = true;
 
   # Font settings
   fonts = {

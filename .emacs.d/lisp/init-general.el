@@ -68,7 +68,7 @@
   (add-hook 'yaml-mode-hook
 	    '(lambda () (define-key yaml-mode-map "\C-m" 'newline-and-indent))))
 
-(use-package aggressive-indent
-  :hook ('prog-mode . #'aggressive-indent-mode))
+;;(use-package aggressive-indent
+;;  :hook ('prog-mode . #'aggressive-indent-mode))
 
 (provide 'init-general)
