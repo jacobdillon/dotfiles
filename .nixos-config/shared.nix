@@ -15,7 +15,7 @@ in {
     };
 
     # Use latest kernel package
-    kernelPackages = pkgs.linuxPackages_latest;
+    #kernelPackages = pkgs.linuxPackages_latest;
 
     cleanTmpDir = true;
   };
