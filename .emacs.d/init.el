@@ -24,4 +24,3 @@
 (require 'init-parens)
 (require 'init-python)
 (require 'init-theme)
-(require 'init-web)

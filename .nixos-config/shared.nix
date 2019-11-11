@@ -121,6 +121,7 @@ in {
     libreoffice
     manpages
     mgba
+    lutris
     mpv
     multimc
     nixfmt
