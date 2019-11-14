@@ -96,10 +96,7 @@ in {
 
   # Packages installed in system profile
   environment.systemPackages = with pkgs; [
-    aspell
-    aspellDicts.en
-    aspellDicts.en-computers
-    aspellDicts.en-science
+    (aspellWithDicts(ps: with ps; [en en-computers en-science]))
     calibre
     colordiff
     curl

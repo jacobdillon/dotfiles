@@ -2,7 +2,9 @@
 
 (use-package flyspell
   :config
-  (flyspell-mode 1))
+  (add-hook 'prog-mode-hook 'flyspell-prog-mode)
+  (add-hook 'text-mode-hook 'flyspell-mode))
+  
 
 (use-package flyspell-correct-ivy
   :after flyspell

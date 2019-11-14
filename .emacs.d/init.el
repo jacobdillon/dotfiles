@@ -18,6 +18,7 @@
 (require 'init-flyspell)
 (require 'init-general)
 (require 'init-git)
+(require 'init-org)
 (require 'init-ivy)
 (require 'init-latex)
 (require 'init-nix)
