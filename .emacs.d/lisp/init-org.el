@@ -8,6 +8,7 @@
 	org-log-done t)
   (add-hook 'org-mode-hook 'turn-on-auto-fill)
   (global-set-key (kbd "C-c l") 'org-store-link)
-  (global-set-key (kbd "C-c a") 'org-agenda))
+  (global-set-key (kbd "C-c a") 'org-agenda)
+  (add-hook 'org-mode-hook 'turn-on-auto-fill))
 
 (provide 'init-org)
