@@ -24,6 +24,12 @@
 (setq inhibit-startup-screen t
       initial-scratch-message "")
 
+;; Create backup and autosave directories if they don't exist
+(unless (file-exists-p "~/.emacs.d/autosave/")
+  (make-directory "~/.emacs.d/autosave/"))
+(unless (file-exists-p "~/.emacs.d/backups/")
+  (make-directory "~/.emacs.d/backups/"))
+
 ;; Set backup files and autosave files to save in a sane location
 (setq backup-by-copying t
       backup-directory-alist '((".*" . "~/.emacs.d/backups/"))

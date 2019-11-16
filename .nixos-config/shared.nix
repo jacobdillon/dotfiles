@@ -137,7 +137,7 @@ in {
     tree
     unstable.emacs
     unstable.heroku
-    unstable.steam
+    steam
     unzip
   ];
 
