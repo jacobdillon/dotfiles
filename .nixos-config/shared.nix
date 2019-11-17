@@ -98,6 +98,7 @@ in {
   environment.systemPackages = with pkgs; [
     (aspellWithDicts(ps: with ps; [en en-computers en-science]))
     calibre
+    chocolateDoom
     colordiff
     curl
     direnv
@@ -116,9 +117,9 @@ in {
     gnupg
     imagemagick
     libreoffice
+    lutris
     manpages
     mgba
-    lutris
     mpv
     multimc
     nixfmt
@@ -129,12 +130,12 @@ in {
     qbittorrent
     slack
     spotify
+    steam
     tdesktop
     texlive.combined.scheme-full
     tree
     unstable.emacs
     unstable.heroku
-    steam
     unzip
   ];
 
