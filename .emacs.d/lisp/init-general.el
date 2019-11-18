@@ -56,7 +56,27 @@
 (use-package pdf-tools
   :mode ("\\.pdf\\'" . pdf-tools-install)
   :config
-  (setq mouse-wheel-follow-mouse t))
+  (setq mouse-wheel-follow-mouse t)
+  ;; Taken from the pdf-view issues page
+  (defun my-pdf-generate-bookmark-name ()
+    (concat "PDF-LAST-VIEWED: " (buffer-file-name)))
+  (defun my-pdf-set-last-viewed-bookmark ()
+    (interactive)
+    (when (eq major-mode 'pdf-view-mode)
+      (bookmark-set (my-pdf-generate-bookmark-name))))
+  (defun my-pdf-jump-last-viewed-bookmark ()
+    (when (my-pdf-has-last-viewed-bookmark)
+      (bookmark-jump (my-pdf-generate-bookmark-name))))
+  (defun my-pdf-has-last-viewed-bookmark ()
+    (member (my-pdf-generate-bookmark-name) (bookmark-all-names)))
+  (defun my-pdf-set-all-last-viewed-bookmarks ()
+    (dolist (buf (buffer-list))
+      (with-current-buffer buf
+	(my-pdf-set-last-viewed-bookmark))))
+  (add-hook 'kill-buffer-hook 'my-pdf-set-last-viewed-bookmark)
+  (add-hook 'pdf-view-mode-hook 'my-pdf-jump-last-viewed-bookmark)
+  (unless noninteractive
+    (add-hook 'kill-emacs-hook 'my-pdf-set-all-last-viewed-bookmarks)))
 
 ;; exec-path-from-shell
 (use-package exec-path-from-shell

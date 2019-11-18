@@ -13,6 +13,7 @@
   :config
   (auctex-latexmk-setup)
   (add-hook 'LaTeX-mode-hook (lambda () (setq TeX-command-default "LatexMk")))
+  (add-hook 'LaTeX-mode-hook 'turn-on-auto-fill)
   (setq auctex-latexmk-inherit-TeX-PDF-mode t))
 
 (provide 'init-latex)
