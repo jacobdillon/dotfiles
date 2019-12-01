@@ -94,6 +94,10 @@
   (add-hook 'yaml-mode-hook
 	    '(lambda () (define-key yaml-mode-map "\C-m" 'newline-and-indent))))
 
+(use-package which-key
+  :config
+  (which-key-mode))
+
 ;;(use-package aggressive-indent
 ;;  :hook ('prog-mode . #'aggressive-indent-mode))
 

@@ -91,12 +91,16 @@ in {
         set = "type";
         design = [ "type" "ss08" ];
       };
+      dwarf-fortress = pkgs.dwarf-fortress-packages.dwarf-fortress-full.override {
+        theme = "taffer";
+      };
     };
   };
 
   # Packages installed in system profile
   environment.systemPackages = with pkgs; [
-    (aspellWithDicts(ps: with ps; [en en-computers en-science]))
+    (aspellWithDicts (ps: with ps; [ en en-computers en-science ]))
+    dwarf-fortress
     calibre
     chocolateDoom
     colordiff
@@ -117,7 +121,7 @@ in {
     gnupg
     imagemagick
     libreoffice
-    lutris
+    unstable.lutris
     manpages
     mgba
     mpv
@@ -136,6 +140,7 @@ in {
     tree
     unstable.emacs
     unstable.heroku
+    unstable.next
     unzip
   ];
 
@@ -188,6 +193,12 @@ in {
 
     # Use systemd-timesyncd to keep time
     timesyncd.enable = true;
+
+    # Make sure my SSDs don't die without warning
+    smartd = {
+      enable = true;
+      notifications.x11.enable = true;
+    };
 
     # Enable syncthing
     syncthing = {

@@ -13,6 +13,7 @@
 (require 'init-c)
 (require 'init-company)
 (require 'init-dired)
+(require 'init-lisp)
 (require 'init-direnv)
 (require 'init-flycheck)
 (require 'init-flyspell)
