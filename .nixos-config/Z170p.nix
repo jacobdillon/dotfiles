@@ -20,7 +20,12 @@
     };
   };
 
-  boot = { kernelModules = [ "kvm-intel" ]; };
+  boot = {
+    #blacklistedKernelModules = [ "amdgpu" "radeon" ];
+    #kernelModules = [ "kvm-intel" "vfio_virqfd" "vfio_pci" "vfio_iommu_type1" "vfio" ];
+    #kernelParams = [ "intel_iommu=on" ];    
+    #extraModprobeConfig = "options vfio-pci ids=1002:67df,1002:aaf0";
+  };
 
   hardware = {
     # Keep microcode up-to-date

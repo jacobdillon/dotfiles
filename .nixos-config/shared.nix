@@ -84,7 +84,7 @@ in {
     allowUnfree = true;
     pulseaudio = true;
 
-    firefox = { enableAdobeFlash = true; };
+    #firefox = { enableAdobeFlash = true; };
 
     packageOverrides = pkgs: {
       iosevka-type = pkgs.iosevka.override {
@@ -112,6 +112,7 @@ in {
     firefox
     firefoxPackages.tor-browser
     gimp
+    virtmanager
     gitAndTools.gitFull
     gnome3.eog
     gnome3.gnome-calculator
@@ -224,8 +225,19 @@ in {
     };
   };
 
-  # Enable docker
-  virtualisation.docker.enable = true;
+  virtualisation = {
+    # Enable docker
+    docker.enable = true;
+    
+    # Enable libvirt
+    libvirtd = {
+      enable = true;
+      qemuOvmf = true;
+      qemuRunAsRoot = false;
+      onBoot = "ignore";
+      onShutdown = "shutdown";
+    };
+  };
 
   # Define a user account
   users.extraUsers.jacob = {
