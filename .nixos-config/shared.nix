@@ -15,7 +15,7 @@ in {
     };
 
     # Use latest kernel package
-    #kernelPackages = pkgs.linuxPackages_latest;
+    kernelPackages = pkgs.linuxPackages_latest;
 
     cleanTmpDir = true;
   };
@@ -110,9 +110,7 @@ in {
     exfat
     file
     firefox
-    firefoxPackages.tor-browser
     gimp
-    virtmanager
     gitAndTools.gitFull
     gnome3.eog
     gnome3.gnome-calculator
@@ -140,8 +138,6 @@ in {
     texlive.combined.scheme-full
     tree
     unstable.emacs
-    unstable.heroku
-    unstable.next
     unzip
   ];
 
@@ -227,16 +223,7 @@ in {
 
   virtualisation = {
     # Enable docker
-    docker.enable = true;
-    
-    # Enable libvirt
-    libvirtd = {
-      enable = true;
-      qemuOvmf = true;
-      qemuRunAsRoot = false;
-      onBoot = "ignore";
-      onShutdown = "shutdown";
-    };
+    #docker.enable = true;
   };
 
   # Define a user account
@@ -246,7 +233,7 @@ in {
     createHome = true;
     description = "Jacob Dillon";
     shell = pkgs.fish;
-    extraGroups = [ "wheel" "networkmanager" "docker" "input" ];
+    extraGroups = [ "wheel" "networkmanager" "docker" "input" "video" ];
     initialPassword = "password";
   };
 

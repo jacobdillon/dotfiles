@@ -27,10 +27,16 @@
     #extraModprobeConfig = "options vfio-pci ids=1002:67df,1002:aaf0";
   };
 
+  services = {
+    xserver.videoDrivers = [ "amdgpu" ];
+  };
+
   hardware = {
     # Keep microcode up-to-date
     cpu.intel.updateMicrocode = true;
   };
+
+  powerManagement.cpuFreqGovernor = "performance";
 
   networking = {
     # Set hostname
