@@ -84,7 +84,8 @@ in {
     allowUnfree = true;
     pulseaudio = true;
 
-    #firefox = { enableAdobeFlash = true; };
+    firefox = { enableAdobeFlash = true; };
+    chromium = { enablePepperFlash = true; };
 
     packageOverrides = pkgs: {
       iosevka-type = pkgs.iosevka.override {
@@ -121,6 +122,7 @@ in {
     imagemagick
     libreoffice
     unstable.lutris
+    chromium
     manpages
     mgba
     mpv
@@ -190,6 +192,9 @@ in {
 
     # Use systemd-timesyncd to keep time
     timesyncd.enable = true;
+
+    # Enable flatpak
+    flatpak.enable = true;
 
     # Make sure my SSDs don't die without warning
     smartd = {
