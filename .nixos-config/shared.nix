@@ -101,13 +101,14 @@ in {
   # Packages installed in system profile
   environment.systemPackages = with pkgs; [
     (aspellWithDicts (ps: with ps; [ en en-computers en-science ]))
-    dwarf-fortress
     calibre
     chocolateDoom
+    chromium
     colordiff
     curl
     direnv
     discord
+    dwarf-fortress
     exfat
     file
     firefox
@@ -121,8 +122,6 @@ in {
     gnupg
     imagemagick
     libreoffice
-    unstable.lutris
-    chromium
     manpages
     mgba
     mpv
@@ -140,6 +139,7 @@ in {
     texlive.combined.scheme-full
     tree
     unstable.emacs
+    unstable.lutris
     unzip
   ];
 
