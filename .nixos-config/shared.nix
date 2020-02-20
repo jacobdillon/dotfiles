@@ -15,7 +15,7 @@ in {
     };
 
     # Use latest kernel package
-    kernelPackages = pkgs.linuxPackages_latest;
+    #kernelPackages = pkgs.linuxPackages_latest;
 
     cleanTmpDir = true;
   };
@@ -84,7 +84,6 @@ in {
     allowUnfree = true;
     pulseaudio = true;
 
-    firefox = { enableAdobeFlash = true; };
     chromium = { enablePepperFlash = true; };
 
     packageOverrides = pkgs: {
@@ -104,7 +103,6 @@ in {
     calibre
     chocolateDoom
     chromium
-    colordiff
     curl
     direnv
     discord
@@ -120,6 +118,7 @@ in {
     gnome3.gnome-tweaks
     gnome3.nautilus
     gnupg
+    gucharmap
     imagemagick
     libreoffice
     manpages
@@ -127,12 +126,9 @@ in {
     mpv
     multimc
     nixfmt
-    opera
     p7zip
-    pass
     posix_man_pages
     qbittorrent
-    slack
     spotify
     steam
     tdesktop
