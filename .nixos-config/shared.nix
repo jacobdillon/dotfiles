@@ -84,7 +84,7 @@ in {
     allowUnfree = true;
     pulseaudio = true;
 
-    chromium = { enablePepperFlash = true; };
+    #chromium = { enablePepperFlash = true; };
 
     packageOverrides = pkgs: {
       iosevka-type = pkgs.iosevka.override {
