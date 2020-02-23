@@ -100,6 +100,7 @@ in {
   # Packages installed in system profile
   environment.systemPackages = with pkgs; [
     (aspellWithDicts (ps: with ps; [ en en-computers en-science ]))
+    audacity
     calibre
     chocolateDoom
     chromium
@@ -119,24 +120,31 @@ in {
     gnome3.nautilus
     gnupg
     gucharmap
+    gucharmap
     imagemagick
     libreoffice
+    magic-wormhole
     manpages
     mgba
     mpv
     multimc
     nixfmt
     p7zip
+    pavucontrol
     posix_man_pages
     qbittorrent
+    ripgrep
+    sc-controller
     spotify
     steam
     tdesktop
     texlive.combined.scheme-full
     tree
     unstable.emacs
+    unstable.kepubify
     unstable.lutris
     unzip
+    youtube-dl
   ];
 
   # Let nautilus find extensions
