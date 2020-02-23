@@ -102,12 +102,12 @@ in {
     (aspellWithDicts (ps: with ps; [ en en-computers en-science ]))
     audacity
     calibre
-    chocolateDoom
-    chromium
+    #chocolateDoom
+    #chromium
     curl
     direnv
     discord
-    dwarf-fortress
+    #dwarf-fortress
     exfat
     file
     firefox
@@ -120,12 +120,11 @@ in {
     gnome3.nautilus
     gnupg
     gucharmap
-    gucharmap
     imagemagick
     libreoffice
     magic-wormhole
     manpages
-    mgba
+    #mgba
     mpv
     multimc
     nixfmt
