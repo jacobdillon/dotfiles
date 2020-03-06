@@ -103,7 +103,7 @@ in {
     audacity
     calibre
     #chocolateDoom
-    #chromium
+    chromium
     curl
     direnv
     discord
