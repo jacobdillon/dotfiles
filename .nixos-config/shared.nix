@@ -76,7 +76,7 @@ in {
     gc = {
       automatic = true;
       dates = "daily";
-      options = "--delete-older-than 30d";
+      options = "--delete-older-than 7d";
     };
   };
 
@@ -84,15 +84,16 @@ in {
     allowUnfree = true;
     pulseaudio = true;
 
-    #chromium = { enablePepperFlash = true; };
-
     packageOverrides = pkgs: {
       iosevka-type = pkgs.iosevka.override {
         set = "type";
         design = [ "type" "ss08" ];
       };
-      dwarf-fortress = pkgs.dwarf-fortress-packages.dwarf-fortress-full.override {
-        theme = "taffer";
+      dwarf-fortress-full = pkgs.dwarf-fortress-packages.dwarf-fortress-full.override {
+        dfVersion = "0.47.04";
+        enableFPS = true;
+        theme = "spacefox";
+        enableDFHack = true;
       };
     };
   };
@@ -100,20 +101,22 @@ in {
   # Packages installed in system profile
   environment.systemPackages = with pkgs; [
     (aspellWithDicts (ps: with ps; [ en en-computers en-science ]))
+    #chocolateDoom
+    unstable.dwarf-fortress-full
+    #mgba
     audacity
     calibre
-    #chocolateDoom
     chromium
     curl
     direnv
     discord
-    #dwarf-fortress
     exfat
     file
     firefox
     gimp
     gitAndTools.gitFull
     gnome3.eog
+    unstable.kepubify
     gnome3.gnome-calculator
     gnome3.gnome-screenshot
     gnome3.gnome-tweaks
@@ -124,7 +127,6 @@ in {
     libreoffice
     magic-wormhole
     manpages
-    #mgba
     mpv
     multimc
     nixfmt
@@ -143,7 +145,10 @@ in {
     unstable.kepubify
     unstable.lutris
     unzip
+    xdotool
+    xorg.xwininfo
     youtube-dl
+    zoom-us
   ];
 
   # Let nautilus find extensions
