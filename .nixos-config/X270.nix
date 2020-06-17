@@ -5,24 +5,26 @@
 
   fileSystems = {
     "/" = {
-      device = "/dev/disk/by-uuid/4c40f7bf-718a-427b-854d-7fb13571673b";
+      device = "/dev/disk/by-uuid/8f87db4c-2dee-40aa-b7f0-05534052993e";
       fsType = "ext4";
     };
 
     "/boot" = {
-      device = "/dev/disk/by-uuid/0267-FFFC";
+      device = "/dev/disk/by-uuid/23D5-5BC0";
       fsType = "vfat";
     };
   };
 
   boot = {
-    initrd.luks.devices = [{
-      name = "crypto-root";
-      device = "/dev/disk/by-uuid/4d1d3f4b-fc6b-4ee3-bf6e-a27da68d8866";
-      preLVM = true;
-      allowDiscards = true;
-    }];
+    initrd.luks.devices = {
+      "crypto-root" = {
+        device = "/dev/disk/by-uuid/08a570e2-2b1a-439d-9310-1ab87ae0f019";
+        preLVM = true;
+        allowDiscards = true;
+      };
+    };
     kernelModules = [ "kvm-intel" "acpi-call" ];
+    kernelParams = [ "i915.enable_psr=0" ];
   };
 
   hardware = {
@@ -34,6 +36,9 @@
       enable = true;
       emulateWheel = true;
     };
+
+    # acpilight
+    acpilight.enable = true;
   };
 
   networking = {

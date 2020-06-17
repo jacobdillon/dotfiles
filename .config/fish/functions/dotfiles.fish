@@ -1,3 +1,1 @@
-function dotfiles
-	/usr/bin/env git --git-dir=$HOME/.dotfiles --work-tree=$HOME $argv;
-end
+/nix/store/dzvnxdql2lci4bjnr8g4f8vivhn0mmsp-home-manager-files/.config/fish/functions/dotfiles.fish

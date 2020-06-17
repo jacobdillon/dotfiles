@@ -15,11 +15,10 @@
 (add-hook 'prog-mode-hook 'display-line-numbers-mode)
 
 ;; Fontface
-(set-frame-font "Iosevka Type 12" nil t)
+(set-frame-font "Go Mono 12" nil t)
 
 ;; Theme settings
-(use-package dracula-theme
-  :config
-  (load-theme 'dracula t))
+(add-to-list 'custom-theme-load-path "~/.emacs.d/themes")
+(load-theme 'taffy t)
 
 (provide 'init-theme)

@@ -1,22 +1,19 @@
 { config, pkgs, lib, ... }:
 
-let
-  unstable = import (fetchTarball {
-    url =
-      "https://github.com/NixOS/nixpkgs-channels/archive/nixos-unstable.tar.gz";
-  }) { config = config.nixpkgs.config; };
-in {
+{
   swapDevices = [{ device = "/swapfile"; }];
 
   boot = {
+    # Use systemd-boot bootloader
     loader = {
       systemd-boot.enable = true;
       efi.canTouchEfiVariables = true;
     };
 
     # Use latest kernel package
-    #kernelPackages = pkgs.linuxPackages_latest;
+    kernelPackages = pkgs.linuxPackages_latest;
 
+    # Clean /tmp/ on boot
     cleanTmpDir = true;
   };
 
@@ -45,32 +42,19 @@ in {
     steam-hardware.enable = true;
   };
 
-  # Workaround for Lutris
-  systemd.extraConfig = "DefaultLimitNOFILE=524288";
-  security.pam.loginLimits = [{
-    domain = "*";
-    type = "hard";
-    item = "nofile";
-    value = "524288";
-  }];
-
   networking = {
     # Use Network Manager
     networkmanager.enable = true;
   };
 
   # Internationalization properties
-  i18n = {
-    consoleFont = "Lat2-Terminus16";
-    consoleKeyMap = "us";
-    defaultLocale = "en_US.UTF-8";
-  };
+  i18n = { defaultLocale = "en_US.UTF-8"; };
 
   # Set time zone
   time.timeZone = "US/Eastern";
 
   nix = {
-    maxJobs = lib.mkDefault 4;
+    maxJobs = lib.mkDefault 5;
     useSandbox = true;
     autoOptimiseStore = true;
     gc = {
@@ -83,93 +67,6 @@ in {
   nixpkgs.config = {
     allowUnfree = true;
     pulseaudio = true;
-
-    packageOverrides = pkgs: {
-      iosevka-type = pkgs.iosevka.override {
-        set = "type";
-        design = [ "type" "ss08" ];
-      };
-      dwarf-fortress-full = pkgs.dwarf-fortress-packages.dwarf-fortress-full.override {
-        dfVersion = "0.47.04";
-        enableFPS = true;
-        theme = "spacefox";
-        enableDFHack = true;
-      };
-    };
-  };
-
-  # Packages installed in system profile
-  environment.systemPackages = with pkgs; [
-    (aspellWithDicts (ps: with ps; [ en en-computers en-science ]))
-    #chocolateDoom
-    unstable.dwarf-fortress-full
-    #mgba
-    audacity
-    calibre
-    chromium
-    curl
-    direnv
-    discord
-    exfat
-    file
-    firefox
-    gimp
-    gitAndTools.gitFull
-    gnome3.eog
-    unstable.kepubify
-    gnome3.gnome-calculator
-    gnome3.gnome-screenshot
-    gnome3.gnome-tweaks
-    gnome3.nautilus
-    gnupg
-    gucharmap
-    imagemagick
-    libreoffice
-    magic-wormhole
-    manpages
-    mpv
-    multimc
-    nixfmt
-    p7zip
-    pavucontrol
-    posix_man_pages
-    qbittorrent
-    ripgrep
-    sc-controller
-    spotify
-    steam
-    tdesktop
-    texlive.combined.scheme-full
-    tree
-    unstable.emacs
-    unstable.kepubify
-    unstable.lutris
-    unzip
-    xdotool
-    xorg.xwininfo
-    youtube-dl
-    zoom-us
-  ];
-
-  # Let nautilus find extensions
-  environment.variables.NAUTILUS_EXTENSION_DIR =
-    "${config.system.path}/lib/nautilus/extensions-3.0";
-  environment.pathsToLink = [ "/share/nautilus-python/extensions" ];
-
-  # Get full man pages
-  documentation.dev.enable = true;
-  documentation.doc.enable = true;
-
-  # Font settings
-  fonts = {
-    # Install a sane set of default fonts
-    enableDefaultFonts = true;
-
-    # Better font look
-    fontconfig.ultimate.enable = true;
-
-    # Extra fonts to install
-    fonts = with pkgs; [ iosevka-type ];
   };
 
   # Programs to enable
@@ -177,14 +74,11 @@ in {
     # Autostart the ssh-agent;
     ssh.startAgent = true;
 
-    # Enable fish shell
+    # Enable fish
     fish.enable = true;
 
-    # Enable some graphical programs
-    evince.enable = true;
-    file-roller.enable = true;
-    gnome-disks.enable = true;
-    gnome-terminal.enable = true;
+    # Enable slock
+    slock.enable = true;
   };
 
   # Services to autostart
@@ -192,7 +86,7 @@ in {
     # CUPS printing support
     printing = {
       enable = true;
-      drivers = with pkgs; [ hplipWithPlugin gutenprint ];
+      drivers = with pkgs; [ hplipWithPlugin ];
     };
 
     # Trim disks weekly
@@ -201,55 +95,42 @@ in {
     # Use systemd-timesyncd to keep time
     timesyncd.enable = true;
 
-    # Enable flatpak
-    flatpak.enable = true;
-
     # Make sure my SSDs don't die without warning
     smartd = {
       enable = true;
       notifications.x11.enable = true;
     };
 
-    # Enable syncthing
-    syncthing = {
-      enable = true;
-      user = "jacob";
-      dataDir = "/home/jacob/.syncthing";
-      openDefaultPorts = true;
-    };
-
     # X11
     xserver = {
       enable = true;
-      displayManager.gdm.enable = true;
-      desktopManager.gnome3.enable = true;
+      displayManager.lightdm = { enable = true; };
+      desktopManager.session = [{
+        name = "home-manager";
+        start = ''
+          ${pkgs.runtimeShell} $HOME/.hm-xsession &
+          waitPID=$!
+        '';
+      }];
+      libinput.enable = true;
       xkbOptions = "ctrl:nocaps";
+      xautolock = {
+        enable = true;
+        locker = "${pkgs.slock}/bin/slock";
+      };
     };
-
-    # Gnome3
-    gnome3 = {
-      core-shell.enable = true;
-      core-utilities.enable = false;
-      gnome-remote-desktop.enable = false;
-    };
-  };
-
-  virtualisation = {
-    # Enable docker
-    #docker.enable = true;
   };
 
   # Define a user account
   users.extraUsers.jacob = {
     isNormalUser = true;
-    uid = 1000;
     createHome = true;
     description = "Jacob Dillon";
+    extraGroups = [ "wheel" "networkmanager" "input" "video" ];
     shell = pkgs.fish;
-    extraGroups = [ "wheel" "networkmanager" "docker" "input" "video" ];
     initialPassword = "password";
   };
 
   # Change this only after the NixOS release notes say you should
-  system.stateVersion = "19.09";
+  system.stateVersion = "20.03";
 }

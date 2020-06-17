@@ -1,7 +1,0 @@
-[user]
-	name = Jacob Dillon
-	email = jacob.dillon@uconn.edu
-[core]
-	editor = emacs
-[diff]
-	noprefix = true
