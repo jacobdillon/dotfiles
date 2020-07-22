@@ -1,6 +1,8 @@
 { config, pkgs, lib, ... }:
 
 {
+  imports = [ ./gnome.nix ];
+
   swapDevices = [{ device = "/swapfile"; }];
 
   boot = {
@@ -76,9 +78,6 @@
 
     # Enable fish
     fish.enable = true;
-
-    # Enable slock
-    slock.enable = true;
   };
 
   # Services to autostart
@@ -104,20 +103,15 @@
     # X11
     xserver = {
       enable = true;
-      displayManager.lightdm = { enable = true; };
-      desktopManager.session = [{
-        name = "home-manager";
-        start = ''
-          ${pkgs.runtimeShell} $HOME/.hm-xsession &
-          waitPID=$!
-        '';
-      }];
+      displayManager.gdm.enable = true;
+      desktopManager.gnome3.enable = true;
       libinput.enable = true;
       xkbOptions = "ctrl:nocaps";
-      xautolock = {
-        enable = true;
-        locker = "${pkgs.slock}/bin/slock";
-      };
+    };
+
+    # gnome3
+    gnome3 = {
+      core-utilities.enable = false;
     };
   };
 
