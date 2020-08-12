@@ -15,10 +15,10 @@
 (add-hook 'prog-mode-hook 'display-line-numbers-mode)
 
 ;; Fontface
-(set-frame-font "Go Mono 12" nil t)
+(set-frame-font "Tamsyn 12" nil t)
 
 ;; Theme settings
 (add-to-list 'custom-theme-load-path "~/.emacs.d/themes")
-(load-theme 'taffy t)
+(load-theme 'lain t)
 
 (provide 'init-theme)

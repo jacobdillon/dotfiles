@@ -5,7 +5,7 @@
  *
  * font: see http://freedesktop.org/software/fontconfig/fontconfig-user.html
  */
-static char *font = "Go Mono:size=12:style=Regular:antialias=true:autohint=true";
+static char *font = "Tamsyn:size=12:style=Regular:antialias=true:autohint=true";
 static int borderpx = 10;
 
 /*
@@ -86,28 +86,28 @@ unsigned int tabspaces = 8;
 static const char *colorname[] = {
 
   /* 8 normal colors */
-  [0] = "#191919", /* black   */
-  [1] = "#bb2222", /* red     */
-  [2] = "#559955", /* green   */
-  [3] = "#ffff66", /* yellow  */
-  [4] = "#0083b1", /* blue    */
-  [5] = "#aa3377", /* magenta */
-  [6] = "#4d9ea1", /* cyan    */
-  [7] = "#9daeb2", /* white   */
+  [0] = "#000000", /* black   */
+  [1] = "#c64c6a", /* red     */
+  [2] = "#a7c64c", /* green   */
+  [3] = "#c66b4c", /* yellow  */
+  [4] = "#4c6ac6", /* blue    */
+  [5] = "#6b4cc6", /* magenta */
+  [6] = "#4cc6a8", /* cyan    */
+  [7] = "#af9e71", /* white   */
 
   /* 8 bright colors */
-  [8]  = "#5b7075", /* black   */
-  [9]  = "#fb7280", /* red     */
-  [10] = "#99ee77", /* green   */
-  [11] = "#8c7564", /* yellow  */
-  [12] = "#30a5ff", /* blue    */
-  [13] = "#ff88bb", /* magenta */
-  [14] = "#80d4d7", /* cyan    */
-  [15] = "#fffae8", /* white   */
+  [8]  = "#373b41", /* black   */
+  [9]  = "#d2738a", /* red     */
+  [10] = "#bad273", /* green   */
+  [11] = "#d28b73", /* yellow  */
+  [12] = "#738ad2", /* blue    */
+  [13] = "#8b73d2", /* magenta */
+  [14] = "#73d2bb", /* cyan    */
+  [15] = "#c1b492", /* white   */
 
   /* special colors */
-  [256] = "#191919", /* background */
-  [257] = "#fffae8", /* foreground */
+  [256] = "#000000", /* background */
+  [257] = "#d2738a", /* foreground */
 };
 
 /*

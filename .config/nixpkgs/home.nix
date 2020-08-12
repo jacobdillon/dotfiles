@@ -2,31 +2,51 @@
 
 let unstable = import <nixpkgs-unstable> { };
 in {
+  imports = [ ./modules/dwm ./modules/st ./modules/dmenu ];
+
   home.packages = with pkgs; [
     audacity
     curl
+    kdenlive
+    youtube-dl
+    (vlc.override { chromecastSupport = true; })
+    ffmpeg
+    scrot
+    toilet
     direnv
     discord
     gimp
-    evince
-    iosevka
     libreoffice
     magic-wormhole
     multimc
     nix-prefetch-scripts
     nixfmt
     pavucontrol
+    pfetch
     qbittorrent
     ripgrep
     sc-controller
     spotify
     steam
+    tamsyn
     tdesktop
-    texlive.combined.scheme-medium
+    texlive.combined.scheme-full
     unstable.dwarf-fortress
-    unstable.kepubify
+    unstable.kepubify 
   ];
 
+  xsession = {
+    enable = true;
+    windowManager.my-dwm.enable = true;
+    scriptPath = ".hm-xsession";
+    initExtra = ''
+      ${pkgs.hsetroot}/bin/hsetroot -fill ~/pictures/wallpapers/lain_noise.png &
+      ${pkgs.lightlocker}/bin/light-locker --lock-on-lid --lock-on-suspend &
+    '';   
+  };
+
+  home.keyboard.options = [ "crtl:nocaps" ];
+  
   xdg.userDirs = {
     enable = true;
     desktop = "~/.desktop";
@@ -34,19 +54,49 @@ in {
     download = "~/downloads";
     music = "~/music";
     pictures = "~/pictures";
-    publicShare = "~/.public";
-    templates = "~/.templates";
+    publicShare = "~/documents/public";
+    templates = "~/documents/templates";
     videos = "~/videos";
   };
 
   fonts.fontconfig.enable = true;
 
-  gtk.theme.package = pkgs.equilux-theme;
-
   services = {
-    dbus.packages = with pkgs; [ gnome3.dconf ];
-
     gnome-keyring.enable = true;
+
+    dunst = {
+      enable = true;
+      settings = {
+        global = {
+          geometry = "250x100-20+32";
+          transparency = 90;
+          font = "Tamsyn 12";
+        };
+      };
+    };
+
+    dwm-status = {
+      enable = true;
+      order = [ "audio" "network" "battery" "time"];
+      extraConfig = {
+        separator = " - ";
+        time = {
+          format = "%a, %b %d %H:%M";
+        };
+        battery = {
+          charging = "bat charging";
+          discharging = "bat discharging";
+          separator = "/";
+        };
+        network = {
+          no_value = "no network";
+          template = "net: {ESSID}";
+        };
+        audio = {
+          template = "vol: {VOL}%";
+        };
+      };
+    };
 
     syncthing.enable = true;
 
@@ -70,16 +120,6 @@ in {
       enable = true;
       userName = "jacobdillon";
       userEmail = "jepityr@protonmail.com";
-    };
-
-    gnome-terminal = {
-      enable = true;
-      profile.default = {
-        default = true;
-        visibleName = "default";
-        font = "DejaVu Sans Mono";
-      };
-      showMenubar = false;
     };
 
     fish = {
@@ -108,6 +148,11 @@ in {
         dotfiles =
           "/usr/bin/env git --git-dir=$HOME/.dotfiles --work-tree=$HOME $argv";
       };
+    };
+
+    zathura = {
+      enable = true;
+      options = { default-bg = "#000000"; default-fg = "#d2738a"; };
     };
   };
 

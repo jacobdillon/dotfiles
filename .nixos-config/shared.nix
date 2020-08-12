@@ -1,8 +1,6 @@
 { config, pkgs, lib, ... }:
 
 {
-  imports = [ ./gnome.nix ];
-
   swapDevices = [{ device = "/swapfile"; }];
 
   boot = {
@@ -47,6 +45,8 @@
   networking = {
     # Use Network Manager
     networkmanager.enable = true;
+
+    firewall.allowedTCPPorts = [ 8010 ];
   };
 
   # Internationalization properties
@@ -100,18 +100,29 @@
       notifications.x11.enable = true;
     };
 
+    upower = { enable = true; };
+
+    # avahi
+    avahi.enable = true;
+
     # X11
     xserver = {
       enable = true;
-      displayManager.gdm.enable = true;
-      desktopManager.gnome3.enable = true;
+      displayManager.lightdm = {
+        enable = true;
+        greeters.mini = {
+          enable = true;
+          user = "jacob";
+        };
+      };
+      desktopManager.session = [{
+        name = "home-manager";
+        start = ''
+          ${pkgs.runtimeShell} $HOME/.hm-xsession &
+          waitPID=$!
+        '';
+      }];
       libinput.enable = true;
-      xkbOptions = "ctrl:nocaps";
-    };
-
-    # gnome3
-    gnome3 = {
-      core-utilities.enable = false;
     };
   };
 
